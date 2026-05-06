@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Rodaje · Madre Chalaca | 3PM-6PM</title>
+    <style>
+        :root {
+            --fondo: #0a0a0c;
+            --fondo-caja: #141418;
+            --fondo-tabla: #111115;
+            --borde: #2a2a30;
+            --naranja: #e67e22;
+            --naranja-claro: #f39c12;
+            --naranja-oscuro: #d35400;
+            --texto: #e0e0e0;
+            --texto-claro: #ccc;
+            --texto-titulos: #fff;
+            --gris: #888;
+            --azul-marino: #1a3c4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #000;
+            color: var(--texto);
+            line-height: 1.7;
+            font-size: 15px;
+            display: flex;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        .pagina-completa {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--fondo);
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(230, 126, 34, 0.08);
+        }
+
+        /* ENCABEZADO */
+        .encabezado {
+            background: linear-gradient(135deg, #1a1a20 0%, #0d0d12 100%);
+            border-bottom: 2px solid var(--naranja);
+            padding: 40px 50px 30px;
+            text-align: center;
+        }
+        .encabezado h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+        }
+        .encabezado .subtitulo {
+            font-size: 1.2em;
+            color: var(--naranja);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .encabezado .meta {
+            font-size: 0.95em;
+            color: var(--gris);
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .encabezado .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .encabezado .meta .icono {
+            font-size: 1.2em;
+        }
+        .alerta-tiempo {
+            margin-top: 20px;
+            background: rgba(230, 126, 34, 0.15);
+            border: 1px solid var(--naranja);
+            padding: 12px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            color: var(--naranja-claro);
+        }
+
+        /* CONTENIDO */
+        .contenido {
+            padding: 40px 50px;
+        }
+        .seccion {
+            margin-bottom: 45px;
+            page-break-inside: avoid;
+        }
+        .seccion:last-child {
+            margin-bottom: 0;
+        }
+        .seccion h2 {
+            font-size: 1.6em;
+            color: #fff;
+            border-bottom: 2px solid var(--naranja);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .seccion h2 .emoji {
+            font-size: 1.3em;
+        }
+        .seccion h3 {
+            font-size: 1.2em;
+            color: var(--naranja-claro);
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+            background: var(--fondo-tabla);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        thead th {
+            background: #1f1f25;
+            color: var(--naranja-claro);
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--naranja);
+        }
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #222;
+            vertical-align: top;
+        }
+        tbody tr:hover td {
+            background: #1a1a20;
+        }
+        .fila-destacada {
+            background: #1e1810;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+        }
+        .badge-iphone {
+            background: #1a2a3a;
+            color: #5b9bd5;
+        }
+        .badge-sony {
+            background: #2a1a2a;
+            color: #c27aff;
+        }
+        .badge-audio {
+            background: #2a2410;
+            color: #f0b823;
+        }
+        .badge-equipo {
+            background: #1a2a1a;
+            color: #7ec87e;
+        }
+        .badge-prioridad {
+            background: var(--naranja);
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* LISTAS */
+        ul,
+        ol {
+            padding-left: 25px;
+            margin: 10px 0;
+            color: var(--texto-claro);
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        .checklist-lista {
+            list-style: none;
+            padding-left: 0;
+        }
+        .checklist-lista li {
+            padding: 6px 0;
+            border-bottom: 1px dotted #222;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .checklist-lista li .check {
+            color: var(--naranja);
+            font-weight: bold;
+            font-size: 1.2em;
+            min-width: 20px;
+        }
+
+        /* CAJAS */
+        .caja-destacada {
+            background: #141418;
+            border-left: 4px solid var(--naranja);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95em;
+            color: var(--texto-claro);
+        }
+        .caja-destacada strong {
+            color: var(--naranja-claro);
+        }
+        .caja-naranja {
+            background: rgba(230, 126, 34, 0.08);
+            border-left-color: var(--naranja-claro);
+        }
+        .arbol-nodos {
+            font-family: 'Courier New', monospace;
+            background: #0d0d12;
+            border: 1px solid #222;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            line-height: 1.8;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 10px 0;
+            color: #ddd;
+        }
+
+        .pie-pagina {
+            background: #0a0a0e;
+            padding: 20px 50px;
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--gris);
+            border-top: 1px solid var(--borde);
+        }
+        .resalta {
+            color: var(--naranja-claro);
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background: #000;
+                padding: 0;
+            }
+            .pagina-completa {
+                box-shadow: none;
+                max-width: 100%;
+                border-radius: 0;
+                border: 1px solid #222;
+                background: #000;
+                color: #ccc;
+            }
+            .encabezado {
+                padding: 25px 30px 20px;
+                background: #0a0a0c;
+            }
+            .contenido {
+                padding: 20px 30px;
+            }
+            .seccion {
+                page-break-inside: avoid;
+                margin-bottom: 25px;
+            }
+            table {
+                font-size: 0.8em;
+                background: #000 !important;
+            }
+            thead th {
+                background: #1a1a1a !important;
+                color: #f90 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .pie-pagina {
+                padding: 15px 30px;
+            }
+            @page {
+                margin: 12mm;
+                size: A4;
+            }
+        }
+        @media (max-width: 768px) {
+            .encabezado {
+                padding: 25px 20px 20px;
+            }
+            .encabezado h1 {
+                font-size: 1.8em;
+            }
+            .contenido {
+                padding: 20px;
+            }
+            table {
+                font-size: 0.8em;
+            }
+            thead th,
+            tbody td {
+                padding: 6px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pagina-completa">
+
+        <!-- ENCABEZADO -->
+        <header class="encabezado">
+            <h1>Plan de Rodaje · 3 Horas</h1>
+            <div class="subtitulo">"Madre Chalaca" · Día de la Madre</div>
+            <div class="alerta-tiempo">⏳ RODAJE INTENSIVO: 3:00 p.m. – 6:00 p.m. (Hora Dorada)</div>
+            <div class="meta">
+                <span><span class="icono">📅</span> 1 día · 3 horas</span>
+                <span><span class="icono">👥</span> Equipo: 3 personas</span>
+                <span><span class="icono">📍</span> Callao, Lima · Perú</span>
+                <span><span class="icono">📱</span> iPhone + Gimbal · Sony fija</span>
+            </div>
+        </header>
+
+        <main class="contenido">
+
+            <!-- VISIÓN GENERAL -->
+            <section class="seccion">
+                <h2><span class="emoji">🎯</span> Estrategia para 3 Horas</h2>
+                <p>Con solo <span class="resalta">3 horas de rodaje (3pm a 6pm)</span>, nos concentramos en los bloques de mayor impacto emocional y mejor luz: <strong>carácter, cierre de jornada, madre e hijo, despedidas</strong>. Aprovechamos la <span class="resalta">hora dorada</span> para retratos cálidos y planos de recurso. El bloque "madrugada" se omite o se evoca con algún plano de calle tranquila si hubiera; la fuerza de las imágenes de la tarde sostendrá el mensaje.</p>
+                <div class="caja-destacada caja-naranja">
+                    <strong>🎬 Prioridad absoluta:</strong> Bloque E (madre e hijo, ¡Feliz día!) + Bloque D (sonrisas, brazos cruzados, cierre).<br>
+                    <strong>🎨 Estilo:</strong> "Dorado Chalaco" – calidez portuaria, sombras profundas, pieles dignas.
+                </div>
+            </section>
+
+            <!-- BLOQUES DEL GUIÓN -->
+            <section class="seccion">
+                <h2><span class="emoji">📜</span> Bloques del Guion (adaptados a 3pm-6pm)</h2>
+                <table>
+                    <thead>
+                        <tr><th>Bloque</th><th>VO en off (frase clave)</th><th>Contenido visual</th><th>Prioridad</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fila-destacada"><td><strong>D · Carácter</strong></td><td>"Lo difícil no nos asusta..."<br>"No esperamos que nos abran el camino..."</td><td>Mujeres sonriendo, brazos cruzados, secándose la frente, cerrando puestos.</td><td><span class="badge badge-prioridad">ALTA</span></td></tr>
+                        <tr class="fila-destacada"><td><strong>E · Despedida</strong></td><td>"Ser madre chalaca... es la única guerra donde ganar no duele"<br>"¡Feliz día de la madre!"</td><td>Madre con hijo (sin rostro), saludos/despedidas, primerísimos planos, audio "Feliz día".</td><td><span class="badge badge-prioridad">ALTÍSIMA</span></td></tr>
+                        <tr><td><strong>A · Manos</strong></td><td>"Una madre chalaca no pide permiso para ser fuerte… lo vive"</td><td>Planos detalle de manos: delantales, frutas, trapos, monedas (si hay tiempo).</td><td><span class="badge badge-equipo">MEDIA</span></td></tr>
+                        <tr><td><strong>B-roll dorado</strong></td><td>—</td><td>Barridos de atardecer, texturas del mercado al cierre, planos de recurso para transiciones.</td><td><span class="badge badge-equipo">BAJA</span></td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- CRONOGRAMA DETALLADO -->
+            <section class="seccion">
+                <h2><span class="emoji">🕗</span> Cronograma Detallado (3:00 p.m. – 6:00 p.m.)</h2>
+                <table>
+                    <thead>
+                        <tr><th>Hora</th><th>Bloque</th><th>Acción</th><th>Cámara princ.</th><th>iPhone + Gimbal</th><th>Sony en trípode</th><th>Notas</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3:00 p.m.</td><td>Montaje</td><td>Llegada, saludo a conocidas, montaje rápido de equipo.</td><td>—</td><td>Chequeo gimbal, filtro ND, Filmic Pro listo.</td><td>Montar trípode, Sony con 50mm, verificar audio shotgun.</td><td>Confirmar mujeres con las que se habló previamente. Releases listos.</td>
+                        </tr>
+                        <tr class="fila-destacada">
+                            <td>3:15 p.m.</td><td>D</td><td><strong>Cierre de jornada:</strong> mujeres secándose la frente, guardando mercancía, cerrando puestos.</td><td>iPhone</td><td>Movimiento alrededor, cámara lenta 60fps para dramatismo del sudor, manos cerrando cortinas, cajas.</td><td>Primeros planos fijos de rostros cansados pero serenos (50mm, luz lateral de tarde).</td><td>Luz cálida ideal. Audio Zoom graba sonidos de cierre. Buscar contraluz.</td>
+                        </tr>
+                        <tr>
+                            <td>4:00 p.m.</td><td>D</td><td><strong>Sonrisas y brazos cruzados:</strong> mujeres mirando a cámara con orgullo.</td><td>Sony</td><td>—</td><td>Plano medio/americano fijo. Asistente conversa para sonrisa genuina. Luego cruzan brazos (contrapicado suave).</td><td>Hora dorada comienza. Fondo con movimiento pero rostro nítido.</td>
+                        </tr>
+                        <tr class="fila-destacada">
+                            <td>4:30 p.m.</td><td>E</td><td><strong>Madre e hijo:</strong> madre vendedora con su niño (sin rostro del menor).</td><td>Sony</td><td>Plano de apoyo si sobra tiempo.</td><td>Plano medio: niño de espaldas, abrazo desde atrás, manos entrelazadas. Composición íntima.</td><td>Luz suave bajo toldo. Emoción genuina. No forzar.</td>
+                        </tr>
+                        <tr class="fila-destacada">
+                            <td>5:00 p.m.</td><td>E</td><td><strong>Despedidas y saludos:</strong> mujeres saludando/despidiéndose de cámara. Primerísimos planos.</td><td>Ambas</td><td>Travelling suave hacia atrás mientras dicen adiós (puede usar angular).</td><td>Primerísimo primer plano fijo con 50mm, mirada directa y sonrisa amplia.</td><td>Hora dorada plena. Filtro ND en iPhone. Buscar reflejos cálidos en ojos.</td>
+                        </tr>
+                        <tr class="fila-destacada">
+                            <td>5:30 p.m.</td><td>E</td><td><strong>¡Feliz día!:</strong> Tomas con audio donde mujeres dicen espontáneamente "¡Feliz día de la madre!"</td><td>Sony (audio)</td><td>iPhone capta otro ángulo (perfil, plano medio).</td><td>Sony con micrófono shotgun graba la voz limpia. Pedir que lo digan con calma, como un regalo.</td><td>Momento clave. Asegurar silencio de fondo o grabar ambiente aparte.</td>
+                        </tr>
+                        <tr>
+                            <td>5:50 p.m.</td><td>A / Recursos</td><td>Planos detalle de manos, barridos de atardecer, toldos, texturas para transiciones.</td><td>iPhone</td><td>Barridos hacia el cielo, desenfoques, toldos. Tomas rápidas de manos si se puede.</td><td>Sony: algún detalle de manos con 50mm si hay tiempo.</td><td>Material extra para cortinillas y prólogo.</td>
+                        </tr>
+                        <tr>
+                            <td>6:00 p.m.</td><td>—</td><td><strong>CIERRE.</strong> Agradecimientos, copias ofrecidas, desmontaje.</td><td>—</td><td>—</td><td>—</td><td>Verificar releases firmados. Guardar equipo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ROLES -->
+            <section class="seccion">
+                <h2><span class="emoji">👥</span> Roles del Equipo (3 personas)</h2>
+                <table>
+                    <thead>
+                        <tr><th>Rol</th><th>Funciones principales</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Director/a & Operador/a Sony</strong></td><td>Opera cámara fija. Compone planos estáticos, retratos, planos detalle. Dirige miradas y emociones. Responsable del audio de saludos (micrófono shotgun).</td></tr>
+                        <tr><td><strong>Operador/a iPhone & Gimbal</strong></td><td>Captura todo el movimiento: seguimientos, B-roll, contrapicados, travellings. Tomas en 24fps y 60fps. Puede tomar fotos de referencia para continuidad.</td></tr>
+                        <tr><td><strong>Asistente de Producción & Sonido</strong></td><td>Habla con trabajadoras, gestiona permisos y releases. Maneja grabador Zoom H1n para ambientes y SFX. Ayuda con reflectores improvisados y vigila cronograma.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- EQUIPO TÉCNICO -->
+            <section class="seccion">
+                <h2><span class="emoji">🎥</span> Equipo Técnico Mínimo (3 horas)</h2>
+                <table>
+                    <thead>
+                        <tr><th>Ítem</th><th>Cant.</th><th>Área</th><th>Responsable</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Cuerpo Sony A7III / FX30</td><td>1</td><td><span class="badge badge-sony">Sony</span></td><td>Director/a</td></tr>
+                        <tr><td>Lente 50mm f/1.8 (retratos, manos)</td><td>1</td><td><span class="badge badge-sony">Sony</span></td><td>Director/a</td></tr>
+                        <tr><td>Tarjeta SD 128GB</td><td>1</td><td><span class="badge badge-sony">Sony</span></td><td>Director/a</td></tr>
+                        <tr><td>Batería Sony cargada</td><td>2</td><td><span class="badge badge-sony">Sony</span></td><td>Director/a</td></tr>
+                        <tr><td>Trípode con rótula fluida</td><td>1</td><td><span class="badge badge-sony">Sony</span></td><td>Director/a</td></tr>
+                        <tr><td>Micrófono shotgun (Rode VideoMic NTG)</td><td>1</td><td><span class="badge badge-sony">Sony</span></td><td>Director/a</td></tr>
+                        <tr><td>iPhone 14 Pro / 15 Pro</td><td>1</td><td><span class="badge badge-iphone">iPhone</span></td><td>Operador/a iPhone</td></tr>
+                        <tr><td>Gimbal DJI Osmo Mobile 6 (cargado)</td><td>1</td><td><span class="badge badge-iphone">iPhone</span></td><td>Operador/a iPhone</td></tr>
+                        <tr><td>App Filmic Pro (Apple Log activado)</td><td>1</td><td><span class="badge badge-iphone">iPhone</span></td><td>Operador/a iPhone</td></tr>
+                        <tr><td>Filtro ND magnético para iPhone</td><td>1</td><td><span class="badge badge-iphone">iPhone</span></td><td>Operador/a iPhone</td></tr>
+                        <tr><td>Powerbank 20,000 mAh</td><td>1</td><td><span class="badge badge-iphone">iPhone</span></td><td>Operador/a iPhone</td></tr>
+                        <tr><td>Grabadora Zoom H1n + pilas + microSD</td><td>1</td><td><span class="badge badge-audio">Audio</span></td><td>Asistente</td></tr>
+                        <tr><td>Audífonos para monitoreo</td><td>1</td><td><span class="badge badge-audio">Audio</span></td><td>Asistente</td></tr>
+                        <tr><td>Cartulina blanca (reflector)</td><td>1</td><td><span class="badge badge-equipo">General</span></td><td>Asistente</td></tr>
+                        <tr><td>Cinta de tela + lapiceros</td><td>1</td><td><span class="badge badge-equipo">General</span></td><td>Asistente</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- CONFIGURACIÓN CÁMARAS -->
+            <section class="seccion">
+                <h2><span class="emoji">⚙️</span> Configuración de Cámaras</h2>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                    <div class="caja-destacada">
+                        <strong>📱 iPhone + Gimbal</strong>
+                        <ul>
+                            <li>App: <strong>Filmic Pro</strong></li>
+                            <li>Perfil: <strong>Apple Log</strong></li>
+                            <li>Resolución: <strong>4K</strong></li>
+                            <li>FPS: <strong>24fps</strong> (miradas/saludos) y <strong>60fps</strong> (cámara lenta)</li>
+                            <li>Obturador: <strong>1/48</strong> (24fps) – usar filtro ND</li>
+                            <li>Balance blancos: manual <strong>5600K</strong></li>
+                        </ul>
+                    </div>
+                    <div class="caja-destacada">
+                        <strong>🎥 Sony en trípode</strong>
+                        <ul>
+                            <li>Perfil: <strong>S-Log2</strong> o HLG</li>
+                            <li>Resolución: <strong>4K 24fps</strong></li>
+                            <li>Balance blancos: manual <strong>5600K</strong> (fijo)</li>
+                            <li>Enfoque: <strong>manual con peaking</strong></li>
+                            <li>Lente: <strong>50mm f/1.8</strong> (principal)</li>
+                            <li>Audio: <strong>Micrófono shotgun conectado</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLORIZACIÓN -->
+            <section class="seccion">
+                <h2><span class="emoji">🎨</span> Workflow de Colorización · "Dorado Chalaco"</h2>
+                <p><strong>Software:</strong> DaVinci Resolve. <strong>Timeline Color Space:</strong> Rec.709 Gamma 2.4.</p>
+                <h3>🌳 Árbol de Nodos (6 nodos)</h3>
+                <div class="arbol-nodos">
+[Clip]
+  ├─ Nodo 1: Normalización (CST)
+  ├─ Nodo 2: Primarias (exposición, balance, contraste)
+  ├─ Nodo 3: Matching entre iPhone y Sony
+  ├─ Nodo 4: Look "Dorado Chalaco"
+  ├─ Nodo 5: Protección de pieles
+  └─ Nodo 6: Viñeta / retoques locales
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Nodo</th><th>Nombre</th><th>Parámetros clave</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>1</strong></td><td>Normalización CST</td><td>iPhone (Apple Log) → Rec.709; Sony (S-Log2) → Rec.709.</td></tr>
+                        <tr><td><strong>2</strong></td><td>Primarias</td><td>Gain (cielos), Lift (sombras), Gamma (rostro 50-70 IRE). Balance: tarde ~6000-6500K.</td></tr>
+                        <tr><td><strong>3</strong></td><td>Matching</td><td>Referencia Sony. Ajustar iPhone: tinte, contraste. Piel a ~10:30 en vectorscopio.</td></tr>
+                        <tr><td><strong>4</strong></td><td>Look Dorado Chalaco</td><td>Offset cálido. Sombras azul petróleo sutil. Altas luces doradas. Reducir saturación de verdes/rojos intensos. Grano 35mm (0.05-0.08).</td></tr>
+                        <tr><td><strong>5</strong></td><td>Protección de pieles</td><td>Calificador HSL invertido para no tocar rostros. O Color Slice.</td></tr>
+                        <tr><td><strong>6</strong></td><td>Toques finales</td><td>Viñeta suave (-0.3 EV esquinas). Degradado en cielos si es necesario.</td></tr>
+                    </tbody>
+                </table>
+                <div class="caja-destacada caja-naranja">
+                    <strong>💡 Exportación:</strong> QuickTime, H.265, 4K, 100 Mbps. Color Space Tag: Rec.709-A (Mac) o Gamma 2.4.
+                </div>
+            </section>
+
+            <!-- CHECKLIST -->
+            <section class="seccion">
+                <h2><span class="emoji">✅</span> Checklist de Rodaje (3PM-6PM)</h2>
+                <h3>🎒 Equipo</h3>
+                <ul class="checklist-lista">
+                    <li><span class="check">☐</span> Sony + lente 50mm + batería + SD</li>
+                    <li><span class="check">☐</span> Trípode + micrófono shotgun</li>
+                    <li><span class="check">☐</span> iPhone + gimbal cargado + Filmic Pro (Apple Log)</li>
+                    <li><span class="check">☐</span> Filtro ND magnético para iPhone</li>
+                    <li><span class="check">☐</span> Powerbank + cable</li>
+                    <li><span class="check">☐</span> Zoom H1n + pilas + microSD</li>
+                    <li><span class="check">☐</span> Audífonos monitoreo</li>
+                    <li><span class="check">☐</span> Cartulina blanca + cinta + lapiceros</li>
+                </ul>
+                <h3>📝 Documentos</h3>
+                <ul class="checklist-lista">
+                    <li><span class="check">☐</span> Autorizaciones de imagen (8+ copias)</li>
+                    <li><span class="check">☐</span> Cronograma impreso</li>
+                </ul>
+                <h3>🎬 Verificaciones por hora</h3>
+                <ul class="checklist-lista">
+                    <li><span class="check">☐</span> 3:00 – Montaje y saludos</li>
+                    <li><span class="check">☐</span> 3:15 – Cierre de jornada (D)</li>
+                    <li><span class="check">☐</span> 4:00 – Sonrisas + brazos cruzados (D)</li>
+                    <li><span class="check">☐</span> 4:30 – Madre e hijo (E)</li>
+                    <li><span class="check">☐</span> 5:00 – Despedidas (E)</li>
+                    <li><span class="check">☐</span> 5:30 – "¡Feliz día!" con audio (E)</li>
+                    <li><span class="check">☐</span> 5:50 – Manos y recursos (A/B-roll)</li>
+                    <li><span class="check">☐</span> 6:00 – Cierre: releases, equipo guardado</li>
+                </ul>
+            </section>
+
+            <!-- AUTORIZACIÓN -->
+            <section class="seccion">
+                <h2><span class="emoji">📄</span> Modelo de Autorización de Uso de Imagen</h2>
+                <div style="border:2px dashed #444; padding:25px; border-radius:8px; background:#0d0d12;">
+                    <p style="text-align:center; font-weight:bold; font-size:1.1em; color:#fff;">AUTORIZACIÓN DE USO DE IMAGEN<br>Proyecto "Madre Chalaca" – Día de la Madre</p>
+                    <p>Yo, <strong style="color:#f90;">_______________________________________________</strong>, DNI <strong style="color:#f90;">__________________</strong>, domicilio <strong style="color:#f90;">______________________________</strong>, teléfono <strong style="color:#f90;">__________________</strong>,</p>
+                    <p><strong>otorgo mi consentimiento</strong> para que mi imagen y voz sean grabadas y difundidas en el video <strong>"Madre Chalaca"</strong>, sin fines de lucro.</p>
+                    <p>Entiendo que apareceré en redes sociales y medios digitales, y que recibiré una copia del video como agradecimiento.</p>
+                    <p><strong>Lugar y fecha:</strong> Callao, ___ de mayo de 2026</p>
+                    <p><strong>Firma participante:</strong> ____________________________</p>
+                    <p><strong>Firma productor/a:</strong> ____________________________</p>
+                </div>
+            </section>
+
+            <!-- TIPS -->
+            <section class="seccion">
+                <h2><span class="emoji">💡</span> Tips para 3 Horas de Rodaje</h2>
+                <ul>
+                    <li><strong>Llega con todo listo.</strong> Filmic Pro configurado, Sony con balance fijo, releases en mano.</li>
+                    <li><strong>Prioriza emociones, no cantidad.</strong> Es mejor 4 sonrisas genuinas que 20 forzadas.</li>
+                    <li><strong>Hora dorada (4:00-6:00pm):</strong> Úsala para los primerísimos planos y despedidas. La luz es mágica.</li>
+                    <li><strong>Audio de "Feliz día":</strong> Graba en un momento de silencio relativo. El asistente puede pedir a los alrededores unos segundos de calma.</li>
+                    <li><strong>Si algo falla, respira.</strong> El Callao y sus mujeres siempre regalan momentos auténticos.</li>
+                </ul>
+            </section>
+
+        </main>
+
+        <footer class="pie-pagina">
+            <p>📅 Plan de Rodaje Express · "Madre Chalaca" · Callao, Perú · Mayo 2026</p>
+            <p style="margin-top:5px;">Equipo: 3 personas · iPhone + Gimbal + Sony fija · 3:00 p.m. – 6:00 p.m.</p>
+        </footer>
+
+    </div>
+</body>
+</html>
